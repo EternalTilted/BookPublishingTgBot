@@ -13,6 +13,7 @@ database: db.PostgresDB = db.PostgresDB()
 dbase = db.PostgresDB()
 count = 0
 
+# Переход в начало работы с бд
 @router.message(CommandStart())
 async def cmd_start(message: Message, state: FSMContext):
     await state.set_state(BotAction.table)
@@ -97,7 +98,7 @@ async def action_state(message: Message, state: FSMContext):
                 await message.answer(f'{el}')
 
 
-# Эдакий оператор for, но для сбора данных у пользователя, разбиения на случаи, а также выполнения запросов к бд
+
 
 # Эдакий оператор for, но для сбора данных у пользователя, разбиения на случаи, а также выполнения запросов к бд
 @router.message(BotAction.dataCollect)
@@ -112,6 +113,7 @@ async def data_collect(message: Message, state: FSMContext):
     column = tables.get_db_columns(current_table)
     ru_column = tables.get_ru_columns(current_table)
 
+    # В зависимости от выполняемого действия собираем данные по-разному
     if action == 'update':
         tables.add_transfer_columns(current_table, column[count])
     elif action == 'delete':
