@@ -15,7 +15,6 @@ count = 0
 
 @router.message(CommandStart())
 async def cmd_start(message: Message, state: FSMContext):
-    # Нужен для сбора данных, определяет собираем ли ключи
     await state.set_state(BotAction.table)
     await message.answer("Выберете с какой таблицей вы хотите работать...",
                          reply_markup=kb.MainKeyboard)
